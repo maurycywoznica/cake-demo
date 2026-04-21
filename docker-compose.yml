@@ -1,0 +1,8 @@
+services:
+  caked:
+    build: .
+    image: caked-clone:latest
+    container_name: caked-app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
