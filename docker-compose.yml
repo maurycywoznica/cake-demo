@@ -1,8 +1,8 @@
 services:
-  caked:
+  cakewise:
     build: .
-    image: caked-clone:latest
-    container_name: caked-app
+    image: cakewise:latest
+    container_name: cakewise-app
     ports:
       # Bind only to localhost — reverse proxy (nginx/Traefik) forwards traffic.
       # Host port 8765 jest nietypowy, nie koliduje z 80/443/3000/8080.

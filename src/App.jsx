@@ -30,7 +30,7 @@ function useTheme() { return useContext(ThemeCtx); }
 const AuthCtx = createContext();
 function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const saved = sessionStorage.getItem('caked_user');
+    const saved = sessionStorage.getItem('cakewise_user');
     return saved ? JSON.parse(saved) : null;
   });
 
@@ -38,7 +38,7 @@ function AuthProvider({ children }) {
     if (username === 'admin' && password === 'admin') {
       const u = { username: 'admin', name: 'Admin BWS', role: 'admin' };
       setUser(u);
-      sessionStorage.setItem('caked_user', JSON.stringify(u));
+      sessionStorage.setItem('cakewise_user', JSON.stringify(u));
       return { ok: true };
     }
     return { ok: false, error: 'Nieprawidłowy login lub hasło' };
@@ -46,7 +46,7 @@ function AuthProvider({ children }) {
 
   const logout = () => {
     setUser(null);
-    sessionStorage.removeItem('caked_user');
+    sessionStorage.removeItem('cakewise_user');
   };
 
   return <AuthCtx.Provider value={{ user, login, logout }}>{children}</AuthCtx.Provider>;
@@ -61,7 +61,7 @@ function RequireAuth({ children }) {
 }
 
 function LoginPage() {
-  useTitle('Logowanie | Caked');
+  useTitle('Logowanie | CakeWise');
   const { login, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -100,7 +100,7 @@ function LoginPage() {
           <div className="mx-auto mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-accent text-white shadow-glow">
             <Cake className="h-8 w-8" />
           </div>
-          <h1 className="text-3xl font-bold">Zaloguj się do <span className="font-caveat text-primary">Caked</span></h1>
+          <h1 className="text-3xl font-bold">Zaloguj się do <span className="font-caveat text-primary">CakeWise</span></h1>
           <p className="mt-2 text-muted-foreground">Panel zarządzania urodzinami w Twojej firmie</p>
         </div>
 
@@ -204,7 +204,7 @@ function Logo() {
   return (
     <Link to="/" className="flex items-center gap-2">
       <div className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-accent text-white shadow-glow"><Cake className="h-5 w-5" /></div>
-      <span className="text-xl font-bold tracking-tight">Caked<span className="font-caveat text-primary">.</span></span>
+      <span className="text-xl font-bold tracking-tight">CakeWise<span className="font-caveat text-primary">.</span></span>
     </Link>
   );
 }
@@ -363,10 +363,10 @@ function FooterCta() {
         <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
         <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
         <h2 className="relative text-4xl font-bold md:text-5xl">Gotowi, by każde urodziny były <span className="font-caveat text-5xl md:text-6xl">wyjątkowe?</span></h2>
-        <p className="relative mx-auto mt-4 max-w-xl text-white/90">Dołącz do firm, które automatyzują świętowanie w zespole z Caked.</p>
+        <p className="relative mx-auto mt-4 max-w-xl text-white/90">Dołącz do firm, które automatyzują świętowanie w zespole z CakeWise.</p>
         <div className="relative mt-8 flex flex-wrap justify-center gap-4">
           <a href="/#pricing" className="inline-flex items-center gap-2 rounded-[var(--radius)] bg-white px-6 py-3 font-semibold text-primary hover:-translate-y-0.5 transition">Rozpocznij bezpłatny okres próbny</a>
-          <a href="mailto:kontakt@caked.pl" className="inline-flex items-center gap-2 rounded-[var(--radius)] border-2 border-white/80 px-6 py-3 font-semibold text-white hover:bg-white/10 transition">Umów demo</a>
+          <a href="mailto:kontakt@cakewise.pl" className="inline-flex items-center gap-2 rounded-[var(--radius)] border-2 border-white/80 px-6 py-3 font-semibold text-white hover:bg-white/10 transition">Umów demo</a>
         </div>
       </div>
     </div></section>
@@ -388,7 +388,7 @@ function Footer() {
           <div className="mt-5 flex gap-3">
             {[Linkedin, Instagram, Facebook].map((Icon, i) => <a key={i} href="#" className="grid h-9 w-9 place-items-center rounded-full border border-border bg-background text-muted-foreground hover:border-primary hover:text-primary"><Icon className="h-4 w-4" /></a>)}
           </div>
-          <a href="mailto:kontakt@caked.pl" className="mt-5 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"><Mail className="h-4 w-4" /> kontakt@caked.pl</a>
+          <a href="mailto:kontakt@cakewise.pl" className="mt-5 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"><Mail className="h-4 w-4" /> kontakt@cakewise.pl</a>
         </div>
         {cols.map(col => (
           <div key={col.t}>
@@ -408,7 +408,7 @@ function Footer() {
         ))}
       </div>
       <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:flex-row">
-        <div>© 2026 Caked. Wszelkie prawa zastrzeżone. · <a href="#" className="hover:text-primary">Prywatność</a> · <a href="#" className="hover:text-primary">Regulamin</a></div>
+        <div>© 2026 CakeWise. Wszelkie prawa zastrzeżone. · <a href="#" className="hover:text-primary">Prywatność</a> · <a href="#" className="hover:text-primary">Regulamin</a></div>
         <div>Zrobione z ♥ we Wrocławiu</div>
       </div>
     </div></footer>
@@ -525,9 +525,9 @@ function HrisTicker() {
    SHARED: NEWS CAROUSEL
    ═══════════════════════════════════════════════ */
 const NEWS_ITEMS = [
-  { date: '16 stycznia 2026', read: '2 min', title: 'Jak działy HR oszczędzają godziny miesięcznie', excerpt: 'Konkretne case studies z firm, które wdrożyły Caked.', gr: 'from-primary to-accent' },
-  { date: '13 stycznia 2026', read: '4 min', title: 'Kolejne miasta na mapie: Katowice, Łódź, Gdynia', excerpt: 'Plan ekspansji Caked na 2026 rok. Zaczynamy od południa Polski.', gr: 'from-accent to-accent2' },
-  { date: '6 stycznia 2026', read: '3 min', title: 'Poznaj zespół Caked Wrocław', excerpt: 'Kto stoi za tortami w naszym flagowym mieście? Rozmowa z ekipą.', gr: 'from-success to-primary' },
+  { date: '16 stycznia 2026', read: '2 min', title: 'Jak działy HR oszczędzają godziny miesięcznie', excerpt: 'Konkretne case studies z firm, które wdrożyły CakeWise.', gr: 'from-primary to-accent' },
+  { date: '13 stycznia 2026', read: '4 min', title: 'Kolejne miasta na mapie: Katowice, Łódź, Gdynia', excerpt: 'Plan ekspansji CakeWise na 2026 rok. Zaczynamy od południa Polski.', gr: 'from-accent to-accent2' },
+  { date: '6 stycznia 2026', read: '3 min', title: 'Poznaj zespół CakeWise Wrocław', excerpt: 'Kto stoi za tortami w naszym flagowym mieście? Rozmowa z ekipą.', gr: 'from-success to-primary' },
 ];
 
 function NewsCarousel() {
@@ -577,7 +577,7 @@ function PressQuote() {
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
           <Quote className="mx-auto h-10 w-10 text-primary/40" />
-          <p className="mt-4 text-2xl font-caveat text-foreground md:text-3xl">„Caked z trzycyfrowym wzrostem — inwestorzy ustawiają się w kolejce."</p>
+          <p className="mt-4 text-2xl font-caveat text-foreground md:text-3xl">„CakeWise z trzycyfrowym wzrostem — inwestorzy ustawiają się w kolejce."</p>
           <p className="mt-4 text-sm text-muted-foreground">2025 · Puls Biznesu</p>
         </div>
       </div>
@@ -603,11 +603,11 @@ function FounderLetter() {
           </button>
           {open && (
             <div className="mt-8 space-y-4 text-foreground/90 leading-relaxed">
-              <p>Caked zaczęło się we Wrocławiu od jednego pytania: czy świętowanie urodzin w pracy da się zrobić bez wysiłku, sprawiedliwie i naprawdę przyjemnie?</p>
+              <p>CakeWise zaczęło się we Wrocławiu od jednego pytania: czy świętowanie urodzin w pracy da się zrobić bez wysiłku, sprawiedliwie i naprawdę przyjemnie?</p>
               <p>Widzieliśmy setki arkuszy kalkulacyjnych z datami urodzin, przypomnień ustawianych w telefonach i paniki w ostatniej chwili. Widzieliśmy też pracowników, którzy czuli się niedoceniani — bo HR zapomniał, albo tort był „przypadkowy".</p>
-              <p>Zbudowaliśmy Caked, żeby to zmienić. Łączymy nowoczesne oprogramowanie z sieciami lokalnych cukierni. Torty są świeże, dostarczane na czas, a zespół HR nie musi pamiętać o niczym.</p>
+              <p>Zbudowaliśmy CakeWise, żeby to zmienić. Łączymy nowoczesne oprogramowanie z sieciami lokalnych cukierni. Torty są świeże, dostarczane na czas, a zespół HR nie musi pamiętać o niczym.</p>
               <p className="font-caveat text-2xl text-primary">Gotowi, żeby komuś uprzyjemnić dzień?</p>
-              <p className="text-sm text-muted-foreground">— Maurycy i zespół Caked</p>
+              <p className="text-sm text-muted-foreground">— Maurycy i zespół CakeWise</p>
             </div>
           )}
         </div>
@@ -620,7 +620,7 @@ function FounderLetter() {
    SHARED: FAQ DATA + SECTION
    ═══════════════════════════════════════════════ */
 const FAQ_ITEMS = [
-  { q: 'Jak działa Caked?', a: 'Caked automatyzuje dostawy tortów urodzinowych dla Twoich pracowników. Wgrywasz listę pracowników, konfigurujesz preferencje raz — my pilnujemy kalendarza, zamawiamy torty i koordynujemy dostawę z lokalnymi cukierniami.' },
+  { q: 'Jak działa CakeWise?', a: 'CakeWise automatyzuje dostawy tortów urodzinowych dla Twoich pracowników. Wgrywasz listę pracowników, konfigurujesz preferencje raz — my pilnujemy kalendarza, zamawiamy torty i koordynujemy dostawę z lokalnymi cukierniami.' },
   { q: 'Ile czasu zajmuje konfiguracja?', a: 'Większość firm kończy konfigurację w mniej niż 10 minut. Import CSV umożliwia szybkie dodanie dużych list pracowników, a integracje z systemami HR (BambooHR, Personio, HiBob) synchronizują dane automatycznie.' },
   { q: 'Ile to kosztuje?', a: 'Plany zaczynają się od 179 PLN miesięcznie dla firm 5–10 osób. Pierwsza dostawa jest GRATIS dla wszystkich nowych firm. Subskrypcja elastyczna — anuluj w dowolnym momencie z 14-dniowym wypowiedzeniem.' },
   { q: 'Gdzie dostarczacie torty?', a: 'Obecnie obsługujemy Wrocław, Warszawę, Kraków, Poznań, Gdańsk i Katowice. Wkrótce Łódź, Lublin i Szczecin. Dostawy realizują lokalne cukiernie partnerskie w godzinach pracy biura.' },
@@ -636,7 +636,7 @@ function FAQSection() {
         <div className="mx-auto mb-10 max-w-2xl text-center">
           <span className="tagline mb-4">FAQ</span>
           <h2 className="text-4xl font-bold md:text-5xl">Najczęściej zadawane pytania</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Wszystko, co musisz wiedzieć o Caked i naszej usłudze.</p>
+          <p className="mt-4 text-lg text-muted-foreground">Wszystko, co musisz wiedzieć o CakeWise i naszej usłudze.</p>
         </div>
         <div className="mx-auto max-w-3xl"><Accordion items={FAQ_ITEMS} /></div>
       </div>
@@ -658,7 +658,7 @@ function Hero() {
       </div>
       <div className="container relative grid items-center gap-12 pb-20 md:pb-28 lg:grid-cols-2">
         <div className="animate-fade-up">
-          <span className="tagline mb-6"><Sparkles className="mr-1.5 inline h-3.5 w-3.5" /> Platforma Caked dla nowoczesnych firm</span>
+          <span className="tagline mb-6"><Sparkles className="mr-1.5 inline h-3.5 w-3.5" /> Platforma CakeWise dla nowoczesnych firm</span>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
             Każdy pracownik zasługuje na bycie{' '}
             <span className="font-caveat text-primary text-6xl md:text-7xl lg:text-[5.5rem]">celebrowanym</span>
@@ -720,7 +720,7 @@ function Experience() {
   return (
     <section className="section bg-card/50"><div className="container">
       <div className="mx-auto mb-12 max-w-2xl text-center">
-        <span className="tagline mb-4">Doświadczenie Caked</span>
+        <span className="tagline mb-4">Doświadczenie CakeWise</span>
         <h2 className="text-4xl font-bold md:text-5xl">Nigdy nie było łatwiej <span className="font-caveat text-primary text-5xl md:text-6xl">świętować z zespołem</span></h2>
       </div>
       <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
@@ -747,7 +747,7 @@ function PlatformSection() {
   const f = [{ t:'Ustaw raz, zapomnij na zawsze',d:'Pełna automatyzacja urodzin — od zamówienia po dostawę.',i:Zap },{ t:'Przejrzysty widok zamówień',d:'Wszystkie zamówienia w jednym miejscu z historią i statusami.',i:LayoutDashboard },{ t:'Bezpieczeństwo danych (RODO)',d:'Dane pracowników są bezpiecznie przechowywane i chronione.',i:Shield },{ t:'Prosty panel zarządzania',d:'Intuicyjny dashboard stworzony dla działów HR.',i:Settings },{ t:'Elastyczna konfiguracja',d:'Dopasuj ustawienia do potrzeb Twojego zespołu.',i:Sparkles }];
   return (
     <section className="section bg-card/50"><div className="container">
-      <div className="mx-auto mb-14 max-w-2xl text-center"><span className="tagline mb-4">Platforma Caked</span><h2 className="text-4xl font-bold md:text-5xl">Wszystko w jednym miejscu</h2><p className="mt-4 text-lg text-muted-foreground">Prosty panel do zarządzania wszystkimi celebracjami w firmie.</p></div>
+      <div className="mx-auto mb-14 max-w-2xl text-center"><span className="tagline mb-4">Platforma CakeWise</span><h2 className="text-4xl font-bold md:text-5xl">Wszystko w jednym miejscu</h2><p className="mt-4 text-lg text-muted-foreground">Prosty panel do zarządzania wszystkimi celebracjami w firmie.</p></div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {f.map(x => <div key={x.t} className="card-surface"><div className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary"><x.i className="h-6 w-6" /></div><h3 className="mb-2 text-lg font-semibold">{x.t}</h3><p className="text-sm text-muted-foreground">{x.d}</p></div>)}
         <div className="card-surface flex flex-col justify-center bg-gradient-accent text-white"><TrendingUp className="mb-4 h-10 w-10" /><div className="text-3xl font-bold">100% dostaw na czas</div><div className="text-white/90">Żadnych zapomnianych urodzin</div></div>
@@ -771,7 +771,7 @@ function UseCases() {
   const c = [{ t:'Urodziny pracowników',d:'Automatycznie, cyklicznie, bez wysiłku',i:Cake },{ t:'Wydarzenia zespołowe',d:'Spotkania, wyjazdy, wspólne świętowanie',i:PartyPopper },{ t:'Jubileusze i rocznice',d:'Rocznice pracy, awanse',i:Award },{ t:'Premiery i sukcesy',d:'Świętuj osiągnięcia z zespołem',i:Rocket },{ t:'Okazje sezonowe',d:'Święta, imprezy końcoworoczne',i:Snowflake }];
   return (
     <section className="section bg-card/50"><div className="container">
-      <div className="mx-auto mb-14 max-w-2xl text-center"><span className="tagline mb-4">Zastosowania</span><h2 className="text-4xl font-bold md:text-5xl">Jedna platforma. Każde firmowe świętowanie.</h2><p className="mt-4 text-lg text-muted-foreground">Od cyklicznych urodzin po jednorazowe wydarzenia — Caked dopasuje się do Twoich potrzeb.</p></div>
+      <div className="mx-auto mb-14 max-w-2xl text-center"><span className="tagline mb-4">Zastosowania</span><h2 className="text-4xl font-bold md:text-5xl">Jedna platforma. Każde firmowe świętowanie.</h2><p className="mt-4 text-lg text-muted-foreground">Od cyklicznych urodzin po jednorazowe wydarzenia — CakeWise dopasuje się do Twoich potrzeb.</p></div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">{c.map(x => <div key={x.t} className="card-surface text-center"><div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-gradient-accent text-white shadow-glow"><x.i className="h-7 w-7" /></div><h3 className="mb-1 font-semibold">{x.t}</h3><p className="text-xs text-muted-foreground">{x.d}</p></div>)}</div>
     </div></section>
   );
@@ -781,10 +781,10 @@ function Comparison() {
   const pairs = [['Zapomniane urodziny i rozczarowani pracownicy','Żadnych zapomnianych urodzin — pełna automatyzacja'],['Ręczne pilnowanie dat w arkuszach','Inteligentny panel z automatycznymi przypomnieniami'],['Panika w ostatniej chwili','Wszystko zaplanowane z wyprzedzeniem'],['Przypadkowa jakość tortów','Torty premium od sprawdzonych cukierni'],['HR spędza godziny na koordynacji','Zero pracy administracyjnej']];
   return (
     <section className="section bg-card/50"><div className="container">
-      <div className="mx-auto mb-14 max-w-2xl text-center"><h2 className="text-4xl font-bold md:text-5xl">Urodziny w firmie na wyższym poziomie</h2><p className="mt-4 text-lg text-muted-foreground">Zobacz, jaką różnicę robi Caked.</p></div>
+      <div className="mx-auto mb-14 max-w-2xl text-center"><h2 className="text-4xl font-bold md:text-5xl">Urodziny w firmie na wyższym poziomie</h2><p className="mt-4 text-lg text-muted-foreground">Zobacz, jaką różnicę robi CakeWise.</p></div>
       <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-        <div className="card-surface"><h3 className="mb-5 text-xl font-semibold text-muted-foreground">Bez Caked</h3><ul className="space-y-4">{pairs.map(([p]) => <li key={p} className="flex items-start gap-3"><XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-destructive" /><span className="text-sm text-muted-foreground">{p}</span></li>)}</ul></div>
-        <div className="card-surface border-primary/30 bg-gradient-to-br from-card to-primary/5"><h3 className="mb-5 text-xl font-semibold text-primary">Z Caked</h3><ul className="space-y-4">{pairs.map(([,b]) => <li key={b} className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" /><span className="text-sm">{b}</span></li>)}</ul></div>
+        <div className="card-surface"><h3 className="mb-5 text-xl font-semibold text-muted-foreground">Bez CakeWise</h3><ul className="space-y-4">{pairs.map(([p]) => <li key={p} className="flex items-start gap-3"><XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-destructive" /><span className="text-sm text-muted-foreground">{p}</span></li>)}</ul></div>
+        <div className="card-surface border-primary/30 bg-gradient-to-br from-card to-primary/5"><h3 className="mb-5 text-xl font-semibold text-primary">Z CakeWise</h3><ul className="space-y-4">{pairs.map(([,b]) => <li key={b} className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" /><span className="text-sm">{b}</span></li>)}</ul></div>
       </div>
     </div></section>
   );
@@ -795,7 +795,7 @@ function RoiCalc() {
   const h = Math.round(count*0.75*12), amt = (h*80).toLocaleString('pl-PL');
   return (
     <section className="section"><div className="container"><div className="mx-auto max-w-3xl card-surface p-8 md:p-12">
-      <div className="mb-6 text-center"><h2 className="text-3xl font-bold md:text-4xl">Kalkulator oszczędności czasu</h2><p className="mt-3 text-muted-foreground">Sprawdź, ile czasu oszczędza HR dzięki Caked.</p></div>
+      <div className="mb-6 text-center"><h2 className="text-3xl font-bold md:text-4xl">Kalkulator oszczędności czasu</h2><p className="mt-3 text-muted-foreground">Sprawdź, ile czasu oszczędza HR dzięki CakeWise.</p></div>
       <label className="mb-2 block text-sm font-medium">Liczba pracowników: <span className="text-primary">{count}</span></label>
       <input type="range" min="5" max="500" value={count} onChange={e => setCount(+e.target.value)} className="w-full accent-primary" />
       <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -841,7 +841,7 @@ function Pricing() {
 }
 
 function Testimonials() {
-  const items = [{ q:'Caked całkowicie zmienił sposób, w jaki świętujemy urodziny w biurze.',n:'Anna Kowalska',r:'HR Manager, TechCorp' },{ q:'Konfiguracja zajęła 5 minut. Teraz nigdy nie przegapiamy urodzin!',n:'Piotr Nowak',r:'Dyrektor operacyjny, FinanceHub' },{ q:'Profesjonalna obsługa, piękne torty i perfekcyjny timing.',n:'Magdalena Wiśniewska',r:'CEO, Marketing Plus' },{ q:'Nasi pracownicy czują się naprawdę docenieni.',n:'Tomasz Lewandowski',r:'People & Culture Lead' }];
+  const items = [{ q:'CakeWise całkowicie zmienił sposób, w jaki świętujemy urodziny w biurze.',n:'Anna Kowalska',r:'HR Manager, TechCorp' },{ q:'Konfiguracja zajęła 5 minut. Teraz nigdy nie przegapiamy urodzin!',n:'Piotr Nowak',r:'Dyrektor operacyjny, FinanceHub' },{ q:'Profesjonalna obsługa, piękne torty i perfekcyjny timing.',n:'Magdalena Wiśniewska',r:'CEO, Marketing Plus' },{ q:'Nasi pracownicy czują się naprawdę docenieni.',n:'Tomasz Lewandowski',r:'People & Culture Lead' }];
   return (
     <section className="section bg-card/50"><div className="container">
       <div className="mx-auto mb-12 max-w-2xl text-center"><h2 className="text-4xl font-bold md:text-5xl">Zaufane przez firmy w Polsce</h2></div>
@@ -869,7 +869,7 @@ function AfterDemo() {
 }
 
 function LandingPage() {
-  useTitle('Caked | Automatyczne dostawy tortów dla firm');
+  useTitle('CakeWise | Automatyczne dostawy tortów dla firm');
   return (<>
     <Hero />
     <LogoTicker />
@@ -898,7 +898,7 @@ function LandingPage() {
    DASHBOARD PAGE
    ═══════════════════════════════════════════════ */
 function DashboardPage() {
-  useTitle('Panel | Caked');
+  useTitle('Panel | CakeWise');
   const { user } = useAuth();
   const [tab, setTab] = useState('overview');
   const kpis = [{ l:'Wszyscy pracownicy',v:24,i:Users,c:'text-primary' },{ l:'Najbliższe urodziny',v:3,i:Calendar,c:'text-accent' },{ l:'W tym miesiącu',v:2,i:Cake,c:'text-accent2' },{ l:'Zaplanowane dostawy',v:5,i:Truck,c:'text-success' }];
@@ -946,7 +946,7 @@ const INIT_EMP = [
 ];
 
 function EmployeesPage() {
-  useTitle('Pracownicy | Caked');
+  useTitle('Pracownicy | CakeWise');
   const [emps, setEmps] = useState(INIT_EMP);
   const [search, setSearch] = useState('');
   const filtered = emps.filter(e => !search || e.name.toLowerCase().includes(search.toLowerCase()));
@@ -979,7 +979,7 @@ function EmployeesPage() {
    SETTINGS PAGE
    ═══════════════════════════════════════════════ */
 function SettingsPage() {
-  useTitle('Ustawienia firmy | Caked');
+  useTitle('Ustawienia firmy | CakeWise');
   const [auto, setAuto] = useState(true);
   return (
     <div className="space-y-8 max-w-3xl">
@@ -1027,7 +1027,7 @@ const CAKES_DATA = [
 ];
 
 function CakesPage() {
-  useTitle('Nasze torty | Caked');
+  useTitle('Nasze torty | CakeWise');
   const [city, setCity] = useState('Wrocław');
   return (<>
     <section className="section"><div className="container">
@@ -1045,20 +1045,20 @@ function CakesPage() {
 const ARTICLES = [
   { id:1,title:'Jak automatyzować urodziny w firmie?',cat:'HR',time:5,gr:'from-primary to-accent' },
   { id:2,title:'5 pomysłów na tort do biura',cat:'Porady',time:4,gr:'from-accent to-accent2' },
-  { id:3,title:'Caked integruje się ze Slack i Teams',cat:'Produkt',time:3,gr:'from-success to-primary' },
+  { id:3,title:'CakeWise integruje się ze Slack i Teams',cat:'Produkt',time:3,gr:'from-success to-primary' },
   { id:4,title:'Dlaczego celebrowanie zwiększa retencję?',cat:'HR',time:7,gr:'from-gold to-accent2' },
-  { id:5,title:'Caked wchodzi do Katowic!',cat:'Aktualności',time:2,gr:'from-accent2 to-primary' },
+  { id:5,title:'CakeWise wchodzi do Katowic!',cat:'Aktualności',time:2,gr:'from-accent2 to-primary' },
   { id:6,title:'Poradnik: tort dla zespołu z dietami',cat:'Porady',time:6,gr:'from-primary to-gold' },
 ];
 
 function BlogPage() {
-  useTitle('Blog | Caked');
+  useTitle('Blog | CakeWise');
   const cats = ['Wszystkie','HR','Porady','Aktualności','Produkt'];
   const [cat, setCat] = useState('Wszystkie');
   const filtered = cat === 'Wszystkie' ? ARTICLES : ARTICLES.filter(a => a.cat === cat);
   return (<>
     <section className="section"><div className="container">
-      <div className="mx-auto mb-12 max-w-2xl text-center"><h1 className="text-4xl font-bold md:text-5xl">Blog</h1><p className="mt-4 text-lg text-muted-foreground">Porady HR, inspiracje i nowości od Caked.</p></div>
+      <div className="mx-auto mb-12 max-w-2xl text-center"><h1 className="text-4xl font-bold md:text-5xl">Blog</h1><p className="mt-4 text-lg text-muted-foreground">Porady HR, inspiracje i nowości od CakeWise.</p></div>
       <div className="mb-10 flex flex-wrap justify-center gap-2">{cats.map(c => <button key={c} onClick={() => setCat(c)} className={`rounded-full px-5 py-2 text-sm font-medium transition ${cat===c?'bg-primary text-primary-foreground shadow-glow':'border border-border bg-card hover:border-primary hover:text-primary'}`}>{c}</button>)}</div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{filtered.map(a => <article key={a.id} className="card-surface overflow-hidden group">
         <div className={`flex h-44 items-center justify-center bg-gradient-to-br ${a.gr}`}><span className="text-4xl opacity-50 group-hover:scale-110 transition">📝</span></div>
@@ -1073,14 +1073,14 @@ function BlogPage() {
    ABOUT PAGE (/o-nas)
    ═══════════════════════════════════════════════ */
 const TEAM = [
-  { name: 'Maurycy Woźnica', role: 'CEO', bio: 'Pomysłodawca Caked. Zanim zbudował platformę, przez 10 lat prowadził działy operacyjne w firmach technologicznych — widział setki arkuszy z urodzinami pracowników.', c: 'bg-primary' },
+  { name: 'Maurycy Woźnica', role: 'CEO', bio: 'Pomysłodawca CakeWise. Zanim zbudował platformę, przez 10 lat prowadził działy operacyjne w firmach technologicznych — widział setki arkuszy z urodzinami pracowników.', c: 'bg-primary' },
   { name: 'Anna Konieczna', role: 'CTO', bio: 'Inżynierka z 12-letnim stażem. Wcześniej tech lead w Allegro i Tidio. Pilnuje, żeby platforma była szybka, bezpieczna i skalowała do tysięcy pracowników.', c: 'bg-accent' },
   { name: 'Piotr Marciniak', role: 'CCO', bio: 'Szef sprzedaży i obsługi klienta. Zbudował relacje z każdą cukiernią partnerską. Dba, żeby HR-y nigdy nie zostały same z problemem.', c: 'bg-accent2' },
   { name: 'Katarzyna Michalska', role: 'Head of Bakery Ops', bio: 'Koordynuje sieć cukierni w 6 miastach. Cukierniczka z wykształcenia — zna branżę od kuchni (dosłownie).', c: 'bg-gold' },
 ];
 
 const TIMELINE = [
-  { date: 'Marzec 2024', title: 'Początki — od pomysłu do pierwszego tortu', desc: 'Caked powstał w małym biurze we Wrocławiu. Pierwszym klientem była wrocławska firma 20-osobowa. Tort dostarczony z Cukierni Sowa, pracownicy zachwyceni.' },
+  { date: 'Marzec 2024', title: 'Początki — od pomysłu do pierwszego tortu', desc: 'CakeWise powstał w małym biurze we Wrocławiu. Pierwszym klientem była wrocławska firma 20-osobowa. Tort dostarczony z Cukierni Sowa, pracownicy zachwyceni.' },
   { date: 'Czerwiec 2024', title: 'Pierwsi partnerzy cukierniczy', desc: 'Nawiązaliśmy współpracę z 4 lokalnymi cukierniami we Wrocławiu. Każda z nich została zaproszona do pilotażu — testowaliśmy logistykę, jakość, czasy dostaw.' },
   { date: 'Wrzesień 2024', title: 'Ekspansja — Warszawa i Kraków', desc: 'Po 6 miesiącach w rodzimym Wrocławiu ruszyliśmy z usługą w Warszawie i Krakowie. 100-tny klient podpisany w grudniu.' },
   { date: 'Luty 2025', title: 'Integracje z systemami HR', desc: 'Uruchamiamy integracje z BambooHR, Personio, enova365 i Comarch. Firmy mogą synchronizować dane pracowników jednym kliknięciem.' },
@@ -1089,15 +1089,15 @@ const TIMELINE = [
 ];
 
 function AboutPage() {
-  useTitle('O nas | Caked');
+  useTitle('O nas | CakeWise');
   return (<>
     <section className="section">
       <div className="container">
         <div className="mx-auto mb-16 max-w-3xl text-center">
           <span className="tagline mb-4">Zespół za tortami</span>
-          <h1 className="text-5xl font-bold md:text-6xl">O <span className="font-caveat text-primary text-6xl md:text-7xl">Caked</span></h1>
+          <h1 className="text-5xl font-bold md:text-6xl">O <span className="font-caveat text-primary text-6xl md:text-7xl">CakeWise</span></h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Caked zaczęło się we Wrocławiu od jednego pytania: czy świętowanie urodzin w pracy da się zrobić bez wysiłku, sprawiedliwie i naprawdę przyjemnie? Łącząc tradycyjne cukiernictwo z nowoczesnym oprogramowaniem, zyskaliśmy zaufanie pierwszych klientów i uwagę lokalnych mediów. Dzisiaj działamy w 6 miastach Polski, współpracujemy z kilkunastoma cukierniami partnerskimi i obsługujemy ponad 250 firm. Naszą misją jest, żeby żaden pracownik nie został zapomniany — a każde urodziny były wyjątkowe.
+            CakeWise zaczęło się we Wrocławiu od jednego pytania: czy świętowanie urodzin w pracy da się zrobić bez wysiłku, sprawiedliwie i naprawdę przyjemnie? Łącząc tradycyjne cukiernictwo z nowoczesnym oprogramowaniem, zyskaliśmy zaufanie pierwszych klientów i uwagę lokalnych mediów. Dzisiaj działamy w 6 miastach Polski, współpracujemy z kilkunastoma cukierniami partnerskimi i obsługujemy ponad 250 firm. Naszą misją jest, żeby żaden pracownik nie został zapomniany — a każde urodziny były wyjątkowe.
           </p>
         </div>
       </div>
@@ -1163,13 +1163,13 @@ function AboutPage() {
    ═══════════════════════════════════════════════ */
 const SW_FEATURES = [
   { tag: 'Wdrożenie', title: 'Onboarding', desc: 'Jednym kliknięciem wgrywasz całą listę pracowników. Kolejne dwa kliknięcia — i masz skonfigurowany adres dostawy, preferencje i reguły. Oficjalnie jesteś gotowy na tort.', slogan: 'Ustaw raz. Zapomnij na zawsze.', icon: Upload },
-  { tag: 'Reguły', title: 'Twoje zasady', desc: 'Pomyśl o Caked jak o sklepie z aplikacjami, ale dla dni wyjątkowych. Wszystkie urodziny, tylko okrągłe, konkretne biura, konkretne torty — Ty decydujesz.', slogan: 'Wszystko działa automatycznie.', icon: Settings },
+  { tag: 'Reguły', title: 'Twoje zasady', desc: 'Pomyśl o CakeWise jak o sklepie z aplikacjami, ale dla dni wyjątkowych. Wszystkie urodziny, tylko okrągłe, konkretne biura, konkretne torty — Ty decydujesz.', slogan: 'Wszystko działa automatycznie.', icon: Settings },
   { tag: 'Czasem po prostu chce się tortu', title: 'Okazje specjalne', desc: 'Kto lubi sztywne zasady? Chcesz tortu „ot tak" — dostaniesz. Dodaj jednorazowe wydarzenie w panelu i cukiernia już wie co piec.', slogan: 'Bo niecodzienne urodziny się zdarzają.', icon: PartyPopper },
   { tag: 'Tracking', title: 'Zarządzanie zamówieniami', desc: 'Przejrzysty widok każdej nadchodzącej celebracji — dla kogo, kiedy, co się dzieje. A jeśli ktoś źle się sprawował w pracy, zawsze możesz wyłączyć dostawę jednym kliknięciem ;)', slogan: 'Pełna kontrola, zero stresu.', icon: LayoutDashboard },
 ];
 
 function SoftwarePage() {
-  useTitle('Software | Caked');
+  useTitle('Software | CakeWise');
   return (<>
     <section className="section">
       <div className="container">
@@ -1177,7 +1177,7 @@ function SoftwarePage() {
           <span className="tagline mb-4">Platforma</span>
           <h1 className="text-5xl font-bold md:text-6xl">Tu dzieje się <span className="font-caveat text-primary text-6xl md:text-7xl">magia</span></h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Caked łączy onboarding, reguły, okazje specjalne i dostawy w jeden płynny proces. Nigdy więcej nie zapomnisz ważnego dnia — i nigdy nie będziesz musiał go pamiętać.
+            CakeWise łączy onboarding, reguły, okazje specjalne i dostawy w jeden płynny proces. Nigdy więcej nie zapomnisz ważnego dnia — i nigdy nie będziesz musiał go pamiętać.
           </p>
           <p className="mt-4 font-caveat text-2xl text-primary md:text-3xl">Urodziny — obsłużone. Dni — stworzone.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -1250,7 +1250,7 @@ const INTEGRATIONS_FULL = [
 ];
 
 function IntegrationsPage() {
-  useTitle('Integracje | Caked');
+  useTitle('Integracje | CakeWise');
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? INTEGRATIONS_FULL : INTEGRATIONS_FULL.slice(0, 20);
 
@@ -1261,7 +1261,7 @@ function IntegrationsPage() {
           <span className="tagline mb-4">HRIS i synchronizacja danych</span>
           <h1 className="text-5xl font-bold md:text-6xl">Wszyscy pracownicy <span className="font-caveat text-primary text-6xl md:text-7xl">zawsze aktualni</span></h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Zbudowane tak, żeby działało z narzędziami, których już używasz. Caked integruje się z {INTEGRATIONS_FULL.length}+ systemami HR, żeby dane pracowników były zawsze świeże, bezpieczne i zsynchronizowane — bez dodatkowej pracy.
+            Zbudowane tak, żeby działało z narzędziami, których już używasz. CakeWise integruje się z {INTEGRATIONS_FULL.length}+ systemami HR, żeby dane pracowników były zawsze świeże, bezpieczne i zsynchronizowane — bez dodatkowej pracy.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link to="/kontakt" className="btn-primary">Umów demo <ArrowRight className="h-4 w-4" /></Link>
@@ -1278,7 +1278,7 @@ function IntegrationsPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { title: 'Szybka konfiguracja', desc: 'Połącz raz, gotowe w niecałe 2 minuty. Połącz swój HRIS z Caked — dane pracowników trafiają bezpośrednio do zakładki „Pracownicy". Zero arkuszy, zero ręcznego wgrywania.', icon: Zap },
+            { title: 'Szybka konfiguracja', desc: 'Połącz raz, gotowe w niecałe 2 minuty. Połącz swój HRIS z CakeWise — dane pracowników trafiają bezpośrednio do zakładki „Pracownicy". Zero arkuszy, zero ręcznego wgrywania.', icon: Zap },
             { title: 'Niezawodność danych', desc: 'Codzienna automatyczna synchronizacja. Nowi pracownicy, odejścia, zaktualizowane adresy — wszystko synchronizuje się każdego dnia. Nigdy nie przegapisz urodzin ani nie wyślesz tortu pod zły adres.', icon: Shield },
             { title: 'Prywatność i bezpieczeństwo', desc: 'Dane pracowników pozostają w Twoim HRIS. Pobieramy wyłącznie to, co niezbędne do dostarczenia tortu. RODO-compliant, szyfrowanie end-to-end, serwery w UE.', icon: Lock },
           ].map(p => { const I = p.icon; return (
@@ -1327,12 +1327,12 @@ function IntegrationsPage() {
    CONTACT PAGE (/kontakt)
    ═══════════════════════════════════════════════ */
 const OFFICES = [
-  { city: 'Wrocław', addr: 'ul. Świdnicka 12, 50-066 Wrocław', phone: '+48 71 000 00 00', email: 'wroclaw@caked.pl', main: true },
-  { city: 'Warszawa', addr: 'ul. Marszałkowska 100, 00-001 Warszawa', phone: '+48 22 000 00 00', email: 'warszawa@caked.pl' },
+  { city: 'Wrocław', addr: 'ul. Świdnicka 12, 50-066 Wrocław', phone: '+48 71 000 00 00', email: 'wroclaw@cakewise.pl', main: true },
+  { city: 'Warszawa', addr: 'ul. Marszałkowska 100, 00-001 Warszawa', phone: '+48 22 000 00 00', email: 'warszawa@cakewise.pl' },
 ];
 
 function ContactPage() {
-  useTitle('Kontakt | Caked');
+  useTitle('Kontakt | CakeWise');
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
@@ -1399,7 +1399,7 @@ function ContactPage() {
             <div className="card-surface bg-gradient-accent text-white">
               <MessageSquare className="mb-3 h-8 w-8" />
               <h3 className="font-semibold">Wsparcie 24/7</h3>
-              <p className="mt-2 text-sm text-white/90">Klienci Caked mają dostęp do dedykowanego opiekuna i wsparcia technicznego przez cały tydzień.</p>
+              <p className="mt-2 text-sm text-white/90">Klienci CakeWise mają dostęp do dedykowanego opiekuna i wsparcia technicznego przez cały tydzień.</p>
             </div>
           </div>
         </div>
@@ -1419,14 +1419,14 @@ const CITY_DATA = {
     name: 'Wrocław', status: 'live',
     tagline: 'Tu wszystko się zaczęło',
     bakeries: ['Cukiernia Sowa', 'La Patisserie Wrocław', 'Sweet Corner', 'Bio Cukiernia'],
-    testimonial: { q: 'Caked obsługuje nasz wrocławski zespół od ponad roku. Torty zawsze na czas, zawsze świeże.', n: 'Anna Kowalska', r: 'HR Manager, TechCorp Wrocław' },
+    testimonial: { q: 'CakeWise obsługuje nasz wrocławski zespół od ponad roku. Torty zawsze na czas, zawsze świeże.', n: 'Anna Kowalska', r: 'HR Manager, TechCorp Wrocław' },
     deliveryZone: 'Dostawy w promieniu 20 km od centrum',
   },
-  'warszawa': { name: 'Warszawa', status: 'live', tagline: 'Serce polskiego biznesu', bakeries: ['A. Blikle', 'Cukiernia Królewska', 'Lukullus'], testimonial: { q: 'Warszawski zespół Caked jest bardzo responsywny. Polecam każdej firmie powyżej 50 osób.', n: 'Piotr Nowak', r: 'Dyrektor operacyjny, FinanceHub' }, deliveryZone: 'Dostawy w całej Warszawie i okolicach' },
-  'krakow': { name: 'Kraków', status: 'live', tagline: 'Królewska stolica cukiernictwa', bakeries: ['Cukiernia Michałek', 'Sweet Cake Kraków'], testimonial: { q: 'W Krakowie Caked działa bez zarzutu. Torty z lokalnych cukierni — czuć tradycję.', n: 'Magdalena Wiśniewska', r: 'CEO, Marketing Plus' }, deliveryZone: 'Kraków + Tarnów' },
-  'poznan': { name: 'Poznań', status: 'live', tagline: 'Słodkie Wielkopolski', bakeries: ['Pożegnanie z Afryką', 'Gurman Cukiernia'], testimonial: { q: 'Poznań pokochał Caked. Torty są naprawdę doskonałe.', n: 'Tomasz Lewandowski', r: 'People Lead, StartupHub' }, deliveryZone: 'Poznań + Swarzędz + Luboń' },
-  'gdansk': { name: 'Gdańsk', status: 'live', tagline: 'Bałtycka słodycz', bakeries: ['Bałtycka Cukiernia', 'Torcik Gdański'], testimonial: { q: 'Caked to najlepsza inwestycja w kulturę firmy w tym roku.', n: 'Kasia Zielińska', r: 'HR Director, BaltTech' }, deliveryZone: 'Trójmiasto (Gdańsk, Gdynia, Sopot)' },
-  'katowice': { name: 'Katowice', status: 'live', tagline: 'Śląsk na słodko', bakeries: ['Cukiernia Śląska', 'Katowickie Torty'], testimonial: { q: 'Świeży start z Caked — pierwsze urodziny już za nami.', n: 'Michał Wójcik', r: 'COO, Silesia Ventures' }, deliveryZone: 'Katowice + Gliwice + Tychy' },
+  'warszawa': { name: 'Warszawa', status: 'live', tagline: 'Serce polskiego biznesu', bakeries: ['A. Blikle', 'Cukiernia Królewska', 'Lukullus'], testimonial: { q: 'Warszawski zespół CakeWise jest bardzo responsywny. Polecam każdej firmie powyżej 50 osób.', n: 'Piotr Nowak', r: 'Dyrektor operacyjny, FinanceHub' }, deliveryZone: 'Dostawy w całej Warszawie i okolicach' },
+  'krakow': { name: 'Kraków', status: 'live', tagline: 'Królewska stolica cukiernictwa', bakeries: ['Cukiernia Michałek', 'Sweet Cake Kraków'], testimonial: { q: 'W Krakowie CakeWise działa bez zarzutu. Torty z lokalnych cukierni — czuć tradycję.', n: 'Magdalena Wiśniewska', r: 'CEO, Marketing Plus' }, deliveryZone: 'Kraków + Tarnów' },
+  'poznan': { name: 'Poznań', status: 'live', tagline: 'Słodkie Wielkopolski', bakeries: ['Pożegnanie z Afryką', 'Gurman Cukiernia'], testimonial: { q: 'Poznań pokochał CakeWise. Torty są naprawdę doskonałe.', n: 'Tomasz Lewandowski', r: 'People Lead, StartupHub' }, deliveryZone: 'Poznań + Swarzędz + Luboń' },
+  'gdansk': { name: 'Gdańsk', status: 'live', tagline: 'Bałtycka słodycz', bakeries: ['Bałtycka Cukiernia', 'Torcik Gdański'], testimonial: { q: 'CakeWise to najlepsza inwestycja w kulturę firmy w tym roku.', n: 'Kasia Zielińska', r: 'HR Director, BaltTech' }, deliveryZone: 'Trójmiasto (Gdańsk, Gdynia, Sopot)' },
+  'katowice': { name: 'Katowice', status: 'live', tagline: 'Śląsk na słodko', bakeries: ['Cukiernia Śląska', 'Katowickie Torty'], testimonial: { q: 'Świeży start z CakeWise — pierwsze urodziny już za nami.', n: 'Michał Wójcik', r: 'COO, Silesia Ventures' }, deliveryZone: 'Katowice + Gliwice + Tychy' },
   'lodz': { name: 'Łódź', status: 'soon' },
   'lublin': { name: 'Lublin', status: 'soon' },
   'szczecin': { name: 'Szczecin', status: 'soon' },
@@ -1436,7 +1436,7 @@ function CityPage() {
   const { pathname } = useLocation();
   const slug = pathname.split('/').pop();
   const data = CITY_DATA[slug];
-  useTitle(`${data?.name || 'Miasto'} | Caked`);
+  useTitle(`${data?.name || 'Miasto'} | CakeWise`);
 
   if (!data) return (
     <section className="section"><div className="container text-center">
@@ -1475,7 +1475,7 @@ function CityPage() {
     <section className="section">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="tagline mb-4">Caked w {data.name}</span>
+          <span className="tagline mb-4">CakeWise w {data.name}</span>
           <h1 className="text-5xl font-bold md:text-6xl">{data.name} — <span className="font-caveat text-primary text-6xl md:text-7xl">{data.tagline}</span></h1>
           <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-success/15 px-4 py-2 text-sm font-medium text-success"><Truck className="h-4 w-4" />{data.deliveryZone}</p>
         </div>
@@ -1549,7 +1549,7 @@ const ORDERS = [
 const ORDER_STATUS = { ordered: { label: 'Zamówiony', c: 'bg-gold/15 text-gold-foreground' }, inProgress: { label: 'W przygotowaniu', c: 'bg-primary/15 text-primary' }, delivered: { label: 'Dostarczony', c: 'bg-success/15 text-success' } };
 
 function OrdersPage() {
-  useTitle('Zamówienia | Caked');
+  useTitle('Zamówienia | CakeWise');
   const [filter, setFilter] = useState('all');
   const filtered = filter === 'all' ? ORDERS : ORDERS.filter(o => o.status === filter);
   return (
@@ -1603,7 +1603,7 @@ const BAKERIES = [
 ];
 
 function BakeriesPage() {
-  useTitle('Cukiernie partnerskie | Caked');
+  useTitle('Cukiernie partnerskie | CakeWise');
   return (
     <div className="space-y-6">
       <div>
@@ -1638,7 +1638,7 @@ function BakeriesPage() {
    DASHBOARD: PROFILE PAGE (/profil)
    ═══════════════════════════════════════════════ */
 function ProfilePage() {
-  useTitle('Profil | Caked');
+  useTitle('Profil | CakeWise');
   const { user } = useAuth();
   const [notif, setNotif] = useState({ email: true, browser: true, sms: false });
   return (
@@ -1649,7 +1649,7 @@ function ProfilePage() {
           <div className="grid h-20 w-20 place-items-center rounded-full bg-gradient-accent text-white text-3xl font-bold">{user?.name?.[0] || 'U'}</div>
           <div>
             <h2 className="text-xl font-bold">{user?.name}</h2>
-            <p className="text-sm text-muted-foreground">{user?.username}@caked.pl · {user?.role}</p>
+            <p className="text-sm text-muted-foreground">{user?.username}@cakewise.pl · {user?.role}</p>
           </div>
         </div>
       </section>
@@ -1657,7 +1657,7 @@ function ProfilePage() {
         <h2 className="text-lg font-semibold">Dane osobowe</h2>
         <div className="grid gap-4 md:grid-cols-2">
           <div><label className="mb-1.5 block text-sm font-medium">Imię i nazwisko</label><input defaultValue={user?.name} className="w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 text-sm" /></div>
-          <div><label className="mb-1.5 block text-sm font-medium">Email</label><input defaultValue={`${user?.username}@caked.pl`} className="w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 text-sm" /></div>
+          <div><label className="mb-1.5 block text-sm font-medium">Email</label><input defaultValue={`${user?.username}@cakewise.pl`} className="w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 text-sm" /></div>
         </div>
         <button className="btn-primary py-2 text-sm"><Save className="h-4 w-4" /> Zapisz</button>
       </section>
