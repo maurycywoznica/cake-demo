@@ -660,8 +660,8 @@ function Hero() {
         <div className="animate-fade-up">
           <span className="tagline mb-6"><Sparkles className="mr-1.5 inline h-3.5 w-3.5" /> Platforma CakeWise dla nowoczesnych firm</span>
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            Każdy pracownik zasługuje na bycie{' '}
-            <span className="font-caveat text-primary text-6xl md:text-7xl lg:text-[5.5rem]">celebrowanym</span>
+            Bo doceniony pracownik to{' '}
+            <span className="font-caveat text-primary text-6xl md:text-7xl lg:text-[5.5rem]">lojalny pracownik</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground md:text-xl">Automatyczne dostawy tortów prosto do biura — bez stresu, bez arkuszy, bez zapomnianych urodzin.</p>
           <div className="mt-8 flex flex-wrap gap-4">
