@@ -1006,6 +1006,17 @@ function SettingsPage() {
 /* ═══════════════════════════════════════════════
    CAKES PAGE
    ═══════════════════════════════════════════════ */
+// ─── Pricing floor ────────────────────────────────────────
+// Minimalna cena za tort (PLN). Żadna cena tortu w UI nie może być niższa.
+const MIN_CAKE_PRICE = 50;
+
+// Parsuje string ceny ("149 PLN") lub liczbę, aplikuje floor i zwraca sformatowany string.
+function cakePrice(raw) {
+  const num = typeof raw === 'number' ? raw : parseInt(String(raw).replace(/\D/g, ''), 10);
+  const safe = Math.max(MIN_CAKE_PRICE, Number.isFinite(num) ? num : MIN_CAKE_PRICE);
+  return `${safe} PLN`;
+}
+
 const CAKES_DATA = [
   { name:'Tort czekoladowy',bakery:'Cukiernia Sowa',price:'149 PLN',gr:'from-amber-800 to-amber-600' },
   { name:'Sernik nowojorski',bakery:'Seromania',price:'129 PLN',gr:'from-yellow-300 to-orange-300' },
@@ -1022,7 +1033,7 @@ function CakesPage() {
     <section className="section"><div className="container">
       <div className="mx-auto mb-12 max-w-2xl text-center"><h1 className="text-4xl font-bold md:text-5xl">Nasze torty urodzinowe</h1><p className="mt-4 text-lg text-muted-foreground">Premium torty celebracyjne dla firm</p></div>
       <div className="mb-10 flex flex-wrap justify-center gap-2">{['Wrocław','Warszawa','Kraków','Poznań','Gdańsk','Katowice'].map(c => <button key={c} onClick={() => setCity(c)} className={`rounded-full px-5 py-2 text-sm font-medium transition ${city===c?'bg-primary text-primary-foreground shadow-glow':'border border-border bg-card hover:border-primary hover:text-primary'}`}>{c}</button>)}</div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{CAKES_DATA.map(cake => <div key={cake.name} className="card-surface overflow-hidden"><div className={`flex h-48 items-center justify-center rounded-t-[calc(var(--radius)-1px)] bg-gradient-to-br ${cake.gr}`}><span className="text-5xl">🎂</span></div><div className="p-5"><h3 className="text-lg font-semibold">{cake.name}</h3><p className="text-sm text-muted-foreground">{cake.bakery}</p><div className="mt-3 flex items-center justify-between"><span className="text-xl font-bold text-primary">{cake.price}</span><button className="btn-primary py-1.5 text-xs">Zamów</button></div></div></div>)}</div>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{CAKES_DATA.map(cake => <div key={cake.name} className="card-surface overflow-hidden"><div className={`flex h-48 items-center justify-center rounded-t-[calc(var(--radius)-1px)] bg-gradient-to-br ${cake.gr}`}><span className="text-5xl">🎂</span></div><div className="p-5"><h3 className="text-lg font-semibold">{cake.name}</h3><p className="text-sm text-muted-foreground">{cake.bakery}</p><div className="mt-3 flex items-center justify-between"><span className="text-xl font-bold text-primary">{cakePrice(cake.price)}</span><button className="btn-primary py-1.5 text-xs">Zamów</button></div></div></div>)}</div>
     </div></section>
     <Footer />
   </>);
@@ -1499,7 +1510,7 @@ function CityPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{cityCakes.map(cake => (
           <div key={cake.name} className="card-surface overflow-hidden">
             <div className={`flex h-48 items-center justify-center rounded-t-[calc(var(--radius)-1px)] bg-gradient-to-br ${cake.gr}`}><span className="text-5xl">🎂</span></div>
-            <div className="p-5"><h3 className="text-lg font-semibold">{cake.name}</h3><p className="text-sm text-muted-foreground">{cake.bakery}</p><div className="mt-3 flex items-center justify-between"><span className="text-xl font-bold text-primary">{cake.price}</span><button className="btn-primary py-1.5 text-xs">Zamów</button></div></div>
+            <div className="p-5"><h3 className="text-lg font-semibold">{cake.name}</h3><p className="text-sm text-muted-foreground">{cake.bakery}</p><div className="mt-3 flex items-center justify-between"><span className="text-xl font-bold text-primary">{cakePrice(cake.price)}</span><button className="btn-primary py-1.5 text-xs">Zamów</button></div></div>
           </div>
         ))}</div>
       </div>
@@ -1569,7 +1580,7 @@ function OrdersPage() {
               <td className="p-4 text-muted-foreground">{o.cake}</td>
               <td className="p-4 text-muted-foreground">{o.bakery}</td>
               <td className="p-4 text-muted-foreground">{new Date(o.date).toLocaleDateString('pl-PL')}</td>
-              <td className="p-4 text-right font-medium">{o.price}</td>
+              <td className="p-4 text-right font-medium">{cakePrice(o.price)}</td>
               <td className="p-4 text-center"><span className={`rounded-full px-2 py-0.5 text-xs font-medium ${ORDER_STATUS[o.status].c}`}>{ORDER_STATUS[o.status].label}</span></td>
             </tr>
           ))}</tbody>
